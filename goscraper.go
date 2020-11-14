@@ -30,12 +30,12 @@ type Document struct {
 }
 
 type DocumentPreview struct {
-	Icon        string
-	Name        string
-	Title       string
-	Description string
-	Images      []string
-	Link        string
+	Icon        string   `json:"icon" bson:"icon"`
+	Name        string   `json:"name" bson:"name"`
+	Title       string   `json:"title" bson:"title"`
+	Description string   `json:"description" bson:"description"`
+	Images      []string `json:"images" bson:"images"`
+	Link        string   `json:"link" bson:"link"`
 }
 
 func Scrape(uri string, maxRedirect int) (*Document, error) {
@@ -197,7 +197,7 @@ func (scraper *Scraper) parseDocument(doc *Document) error {
 				if cleanStr(attr.Key) == "rel" && cleanStr(attr.Val) == "canonical" {
 					canonical = true
 				}
-				if cleanStr(attr.Key) == "rel" && strings.Contains(cleanStr(attr.Val),  "icon") {
+				if cleanStr(attr.Key) == "rel" && strings.Contains(cleanStr(attr.Val), "icon") {
 					hasIcon = true
 				}
 				if cleanStr(attr.Key) == "href" {
